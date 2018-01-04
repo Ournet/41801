@@ -1,0 +1,50 @@
+{
+  "name": "41801",
+  "version": "0.0.1",
+  "description": "41801",
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
+  "scripts": {
+    "pretest": "npm run clean && npm run tsc",
+    "test": "ava --no-cache --verbose  ./lib/*.test.js ./lib/**/*.test.js",
+    "posttest": "npm run clean-test-code",
+    "tsc": "tsc",
+    "tscw": "tsc -w",
+    "preversion": "npm run tsc",
+    "postversion": "git push --follow-tags",
+    "prepublish": "npm run tsc && npm run clean-test-code",
+    "clean": "rm -fr ./lib && rm -fr ./types",
+    "clean-test-code": "rm -fr ./lib/**/*.test.js && rm -fr ./lib/*.test.js && rm -fr ./types/**/*.test.d.ts && rm -fr ./types/*.test.d.ts"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ournet/41801.git"
+  },
+  "keywords": [
+    "41801"
+  ],
+  "author": "Dumitru Cantea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ournet/41801/issues"
+  },
+  "homepage": "https://github.com/Ournet/41801",
+  "dependencies": {
+    "contentful": "^5.0.5",
+    "dotenv": "^4.0.0",
+    "lru-cache": "^4.1.1",
+    "ms": "^2.1.1",
+    "object-hash": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/lru-cache": "^4.1.0",
+    "@types/ms": "^0.7.30",
+    "@types/node": "^6.x.x",
+    "ava": "^0.23.0",
+    "debug": "^3.1.0",
+    "typescript": "^2.6.1"
+  }
+}
