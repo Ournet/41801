@@ -56,11 +56,22 @@ export interface FilterArticlesParams {
     categorySlug?: string
 }
 
+export interface FilterArticleParams {
+    id?: string
+    slug?: string
+}
+
+export interface FilterCategoryParams {
+    id?: string
+    slug?: string
+}
+
 export interface ContentApi {
-    category(id: string): Promise<CategoryEntity>
-    rootCategories(): Promise<CategoryEntity[]>
-    allCategories(): Promise<CategoryEntity[]>
+    category(filter: FilterCategoryParams): Promise<CategoryEntity>
+    rootCategories(): Promise<CategoryCollection>
+    allCategories(): Promise<CategoryCollection>
     articles(filter: FilterArticlesParams): Promise<ArticleCollection>
+    article(filter: FilterArticleParams): Promise<ArticleEntity>
 }
 
 export class ImplContentApi extends CacheContentfulApi implements ContentApi {
@@ -77,18 +88,29 @@ export class ImplContentApi extends CacheContentfulApi implements ContentApi {
             })
     }
 
-
-
-    article(id: string): Promise<ArticleEntity> {
-        return this.getArticles({
-            'sys.id': id,
+    article(filter: FilterArticleParams): Promise<ArticleEntity> {
+        if (!filter || !filter.id && !filter.slug) {
+            return Promise.reject(new Error(`parameter filter is invalid`));
+        }
+        const query: ApiQuery = {
             include: 1,
             limit: 1,
-        }).then(articles => articles.items.length && articles.items[0] || null);
+        };
+        if (filter.slug) {
+            query['fields.slug'] = filter.slug;
+        } else {
+            query['sys.id'] = filter.id;
+        }
+        return this.getArticles(query)
+            .then(articles => articles.items.length && articles.items[0] || null);
     }
 
     articles(filter: FilterArticlesParams): Promise<ArticleCollection> {
+        if (!filter) {
+            return Promise.reject(new Error(`parameter filter is invalid`));
+        }
         const query: ApiQuery = { limit: filter.limit };
+        query.select = 'sys.id,sys.createdAt,sys.updatedAt,fields.title,fields.slug,fields.summary,fields.image,fields.category';
 
         switch (filter.order) {
             case 'createdAt':
@@ -115,31 +137,41 @@ export class ImplContentApi extends CacheContentfulApi implements ContentApi {
         return this.getArticles(query);
     }
 
+    category(filter: FilterCategoryParams): Promise<CategoryEntity> {
+        if (!filter || !filter.id && !filter.slug) {
+            return Promise.reject(new Error(`parameter filter is invalid`));
+        }
+        const query: ApiQuery = {
+            include: 1,
+            limit: 1,
+        };
+        if (filter.slug) {
+            query['fields.slug'] = filter.slug;
+        } else {
+            query['sys.id'] = filter.id;
+        }
+        return this.getCategories(query)
+            .then(collection => collection.items.length && collection.items[0] || null);
+    }
+
+    rootCategories(): Promise<CategoryCollection> {
+        return this.getCategories({ order: 'fields.slug', 'fields.parent': null });
+    }
+
+    allCategories(): Promise<CategoryCollection> {
+        return this.getCategories({ order: 'fields.slug' });
+    }
+
     protected getArticles(query: any): Promise<ArticleCollection> {
+        query.content_type = ContentTypes.ARTICLE;
         return this.getCacheEntries(ContentTypes.ARTICLE, query)
             .then(toArticles);
     }
 
-    category(id: string): Promise<CategoryEntity> {
-        return this.getCacheEntry(ContentTypes.CATEGORY, id).then(toCategory);
-    }
-
-    rootCategories(): Promise<CategoryEntity[]> {
-        return this.getCacheEntries(ContentTypes.CATEGORY, {
-            // select: 'sys.id,sys.createdAt,sys.updatedAt,fields.'
-            content_type: ContentTypes.CATEGORY,
-            parent: null,
-            order: 'fields.slug',
-        }).then(toCategories);
-    }
-
-    allCategories(): Promise<CategoryEntity[]> {
-        return this.getCacheEntries(ContentTypes.CATEGORY, {
-            // select: 'sys.id,sys.createdAt,sys.updatedAt,fields.'
-            content_type: ContentTypes.CATEGORY,
-            // parent: null,
-            order: 'fields.slug',
-        }).then(toCategories);
+    protected getCategories(query: any): Promise<CategoryCollection> {
+        query.content_type = ContentTypes.CATEGORY;
+        return this.getCacheEntries(ContentTypes.CATEGORY, query)
+            .then(toCategories);
     }
 }
 
@@ -188,12 +220,20 @@ function toArticle(entity: ContentfulEntity): ArticleEntity {
 }
 
 
-function toCategories(collection: ContentfulEntityCollection<ContentfulEntity>): CategoryEntity[] {
-    if (!collection || !collection.items.length) {
-        return [];
+function toCategories(collection: ContentfulEntityCollection<ContentfulEntity>): CategoryCollection {
+    const data: CategoryCollection = { total: 0, items: [] };
+    if (!collection) {
+        return data;
     }
 
-    return collection.items.map(toCategory);
+    if (!collection.items) {
+        data.total = collection.total || data.total;
+        return data;
+    }
+
+    data.items = collection.items.map(toCategory);
+
+    return data;
 }
 
 function toCategory(entity: ContentfulEntity): CategoryEntity {
