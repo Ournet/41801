@@ -1,0 +1,5 @@
+{
+  "home": "/",
+  "article": "/article/${0}",
+  "category": "/${0}"
+}

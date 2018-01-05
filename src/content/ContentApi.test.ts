@@ -1,5 +1,5 @@
 
-require('dotenv').load();
+require('dotenv').config();
 
 import { ImplContentApi } from './ContentApi';
 import test from 'ava';
