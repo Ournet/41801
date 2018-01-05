@@ -20,6 +20,7 @@ export interface ContentfulEntity {
 }
 
 export interface ApiQuery {
+    limit: number
     content_type?: string
     select?: string
     [index: string]: string | number
@@ -47,14 +48,14 @@ export class ContentfulApi {
         this.client = createClient({ ...this.options, ...{} });
     }
 
-    protected getEntry(id: string, query?: ApiQuery): Promise<ContentfulEntity> {
-        return this.client.getEntry(id, query)
-            .then(entry => {
-                debug(`for getEntry ${id}, ${query} got: `, JSON.stringify(entry));
-                return entryToEntity(entry)
-            })
-            .catch(catchError);
-    }
+    // protected getEntry(id: string, query?: ApiQuery): Promise<ContentfulEntity> {
+    //     return this.client.getEntry(id, query)
+    //         .then(entry => {
+    //             debug(`for getEntry ${id}, ${query} got: `, JSON.stringify(entry));
+    //             return entryToEntity(entry)
+    //         })
+    //         .catch(catchError);
+    // }
 
     protected getEntries(query: ApiQuery): Promise<ContentfulEntityCollection<ContentfulEntity>> {
         return this.client.getEntries(query)
@@ -65,14 +66,14 @@ export class ContentfulApi {
     }
 }
 
-function catchError(error: any): null {
-    if (error) {
-        if (error.status === 404 || error.response && error.response.status === 404) {
-            return null;
-        }
-    }
-    throw error;
-}
+// function catchError(error: any): null {
+//     if (error) {
+//         if (error.status === 404 || error.response && error.response.status === 404) {
+//             return null;
+//         }
+//     }
+//     throw error;
+// }
 
 function toEntityCollection(data: EntryCollection<ContentfulEntity>) {
     if (!data) {
