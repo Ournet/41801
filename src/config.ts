@@ -3,16 +3,18 @@ export interface IConfig {
     name: string
     host: string
     domain: string
-    language: string
     schema: string
+    language: string
+    locale: string
 }
 
 const config: IConfig = {
     name: '41801',
     host: 'localhost:41801',
     domain: 'localhost:41801',
+    schema: 'https:',
     language: 'ro',
-    schema: 'https:'
+    locale: 'ro_RO',
 }
 
 export default config;

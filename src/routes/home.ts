@@ -12,7 +12,7 @@ export default route;
 
 //index
 
-route.get('/', function (_req: Request, res: Response, next: NextFunction) {
+route.get('/', function (_req: Request, res: Response, _next: NextFunction) {
 
     maxageIndex(res);
     const __ = res.locals.__;

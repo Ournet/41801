@@ -1,6 +1,10 @@
 {
-    "error_title": "Eroare",
-    "error_description": "A apărut o eroare. Căutăm vinovații...",
-    "home": "Acasă",
-    "search_": "Caută..."
+	"41801": "41801",
+	"error_title": "Eroare",
+	"error_description": "A apărut o eroare. Căutăm vinovații...",
+	"home": "Acasă",
+	"search_": "Caută...",
+	"home_title": "home_title",
+	"home_description": "home_description",
+	"home_keywords": "home_keywords"
 }

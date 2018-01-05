@@ -1,0 +1,57 @@
+doctype html
+html(lang=culture.language)
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    title= (site.head.title || site.title)
+    meta(name='description', content=site.head.description)
+    meta(name='keywords', content=site.head.keywords)
+    block styles
+    if (site.head.canonical)
+      link(rel='canonical', href=site.head.canonical)
+
+    if (config.facebookId)
+      meta(property='fb:app_id', content=config.facebookId)
+
+    if (config.facebookPublisher)
+      link(rel='publisher', href='https://facebook.com/'+ config.facebookPublisher)
+    meta(property='og:site_name', content=config.name)
+    //- meta(property='og:updated_time', content=currentDate.toDate().toISOString())
+    meta(property='og:locale', content=culture.locale)
+    link(rel="stylesheet", media="all", href="/static/css/"+assets['main.css'])
+
+    //- link(rel='dns-prefetch', href='//ajax.googleapis.com')
+    link(rel='dns-prefetch', href='//tpc.googlesyndication.com')
+    link(rel='dns-prefetch', href='//pagead2.googlesyndication.com')
+
+  body
+    #fb-root
+    header#page-header
+      .container
+        include ../includes/footer
+    main#page-main
+      .container
+        block page_main_content
+    footer#page-footer
+      .container
+        include ../includes/footer
+
+    if (!noGoogleAds)
+      //- script(async, src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+    block scripts
+      //- script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js')
+      
+    if(config.googleAnalyticsId)
+      script.
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', '#{config.googleAnalyticsId}', '#{config.domain}');
+        ga('send', 'pageview');
+
+      if (_events && _events.length)
+        script
+          each a in _events
+            = "ga('send', 'event', '"+a.category+"', '"+a.action+"', '"+a.label+"', '"+a.value+"')"

@@ -4,6 +4,7 @@ import { format } from 'util';
 import { moment } from '../utils';
 import { Request, Response, NextFunction } from 'express';
 import config from '../config';
+const assets: { [name: string]: string } = require('../../public/static/rev-manifest.json');
 
 const util = {
     moment: moment,
@@ -11,6 +12,13 @@ const util = {
 };
 
 export default function (_req: Request, res: Response, next: NextFunction) {
+
+    res.locals.culture = {
+        language: config.language,
+        locale: config.locale,
+    }
+
+    res.locals.assets = assets;
 
     res.locals.noGoogleAds = false;
 
