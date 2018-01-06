@@ -8,9 +8,10 @@ const rename = require('gulp-rename');
 const rev = require('gulp-rev');
 // const sourcemaps = require('gulp-sourcemaps');
 
-gulp.task('sass', function () {
+gulp.task('sass-main', function () {
   return gulp.src('./assets/scss/main.scss')
     .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./public/static/css'))
     // .pipe(sourcemaps.init())
     .pipe(cleanCSS())
     .pipe(rev())
@@ -28,4 +29,4 @@ gulp.task('sass:watch', function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass-main']);
