@@ -14,3 +14,58 @@
 //         max-width: 420px;
 //     }
 // }
+
+.nav-trigger {
+    height: 24px;
+    cursor: pointer;
+    position: relative;
+    margin-right: 10px;
+    -webkit-transition: opacity 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease-in-out;
+    -o-transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
+    &:hover {
+        opacity: .6;
+    }
+    &.active {
+        opacity: .25;
+    }
+    i {
+        display: inline-block;
+        width: 22px;
+        background: #000;
+        height: 2px;
+        position: relative;
+        vertical-align: top;
+        margin-top: 10px;
+        -webkit-transition: background 0.3s ease-in-out;
+        -moz-transition: background 0.3s ease-in-out;
+        -o-transition: background 0.3s ease-in-out;
+        transition: background 0.3s ease-in-out;
+        &:before{
+            content: '';
+            width: 22px;
+            background: #000;
+            height: 2px;
+            position: absolute;
+            top: -8px;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+        &:after {
+            content: '';
+            width: 22px;
+            background: #000;
+            height: 2px;
+            position: absolute;
+            top: auto;
+            bottom: -8px;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+    }
+}

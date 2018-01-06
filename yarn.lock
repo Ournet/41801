@@ -1237,6 +1237,12 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
+concat-with-sourcemaps@^1.0.0:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/concat-with-sourcemaps/-/concat-with-sourcemaps-1.0.4.tgz#f55b3be2aeb47601b10a2d5259ccfb70fd2f1dd6"
+  dependencies:
+    source-map "^0.5.1"
+
 concordance@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/concordance/-/concordance-3.0.0.tgz#b2286af54405fc995fc7345b0b106d8dd073cb29"
@@ -2273,6 +2279,14 @@ gulp-clean-css@^3.9.2:
     plugin-error "0.1.2"
     through2 "2.0.3"
     vinyl-sourcemaps-apply "0.2.1"
+
+gulp-concat@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/gulp-concat/-/gulp-concat-2.6.1.tgz#633d16c95d88504628ad02665663cee5a4793353"
+  dependencies:
+    concat-with-sourcemaps "^1.0.0"
+    through2 "^2.0.0"
+    vinyl "^2.0.0"
 
 gulp-rename@^1.2.2:
   version "1.2.2"
@@ -5401,7 +5415,7 @@ vinyl@^0.5.0:
     clone-stats "^0.0.1"
     replace-ext "0.0.1"
 
-vinyl@^2.0.1, vinyl@^2.1.0:
+vinyl@^2.0.0, vinyl@^2.0.1, vinyl@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vinyl/-/vinyl-2.1.0.tgz#021f9c2cf951d6b939943c89eb5ee5add4fd924c"
   dependencies:

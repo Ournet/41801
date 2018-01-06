@@ -34,7 +34,7 @@ html(lang=culture.language)
     #fb-root
     header#page-header
       .container
-        include ../includes/footer
+        include ../includes/header
     main#page-main
       .container
         block page_main_content
@@ -44,6 +44,11 @@ html(lang=culture.language)
 
     if (!noGoogleAds)
       //- script(async, src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+    //- script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', crossorigin='anonymous')
+    if (NODE_ENV==='production')
+      script(type='text/javascript', async, src="/static/js/"+assets['main.js'])
+    else
+      script(type='text/javascript', async, src="/static/js/main.js")
     block scripts
       //- script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js')
       
