@@ -68,10 +68,23 @@ export interface FilterCategoryParams {
 
 export interface IContentApi {
     category(filter: FilterCategoryParams): Promise<CategoryEntity>
-    rootCategories(): Promise<CategoryCollection>
+    rootCategories(): Promise<CategoryEntity[]>
+    mainCategories(limit: number): Promise<CategoryEntity[]>
     allCategories(): Promise<CategoryCollection>
     articles(filter: FilterArticlesParams): Promise<ArticleCollection>
+    articlesList(filter: FilterArticlesParams): Promise<ArticleEntity[]>
     article(filter: FilterArticleParams): Promise<ArticleEntity>
+}
+
+const CACHE_OPTIONS = {
+    category: {
+        item: { max: 50, maxAge: ms('1h') },
+        collection: { max: 50, maxAge: ms('30m') },
+    },
+    article: {
+        item: { max: 50, maxAge: ms('10m') },
+        collection: { max: 100, maxAge: ms('30m') },
+    }
 }
 
 export class ContentApi extends CacheContentfulApi implements IContentApi {
@@ -80,12 +93,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             space: process.env.CONTENTFUL_SPACE,
             accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
         },
-            {
-                category: {
-                    item: { max: 50, maxAge: ms('1h') },
-                    collection: { max: 50, maxAge: ms('30m') },
-                }
-            })
+            CACHE_OPTIONS)
     }
 
     article(filter: FilterArticleParams): Promise<ArticleEntity> {
@@ -103,6 +111,10 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
         }
         return this.getArticles(query)
             .then(articles => articles.items.length && articles.items[0] || null);
+    }
+
+    articlesList(filter: FilterArticlesParams): Promise<ArticleEntity[]> {
+        return this.articles(filter).then(result => result.items);
     }
 
     articles(filter: FilterArticlesParams): Promise<ArticleCollection> {
@@ -154,12 +166,35 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
             .then(collection => collection.items.length && collection.items[0] || null);
     }
 
-    rootCategories(): Promise<CategoryCollection> {
-        return this.getCategories({ order: 'fields.slug', 'fields.parent': null });
+    mainCategories(limit: number): Promise<CategoryEntity[]> {
+        return this.getCategoriesList({
+            order: 'fields.slug',
+            'fields.parent[exists]': true,
+            limit: limit
+        });
+    }
+
+    rootCategories(): Promise<CategoryEntity[]> {
+        return this.getCategoriesList({
+            order: 'fields.slug',
+            'fields.parent': null,
+            limit: 10
+        });
     }
 
     allCategories(): Promise<CategoryCollection> {
-        return this.getCategories({ order: 'fields.slug' });
+        return this.getCategories({
+            order: 'fields.slug',
+            limit: 100
+        });
+    }
+
+    protected getArticlesList(query: any): Promise<ArticleEntity[]> {
+        return this.getArticles(query).then(result => result.items);
+    }
+
+    protected getCategoriesList(query: any): Promise<CategoryEntity[]> {
+        return this.getCategories(query).then(result => result.items);
     }
 
     protected getArticles(query: any): Promise<ArticleCollection> {

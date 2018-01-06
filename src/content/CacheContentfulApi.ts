@@ -41,30 +41,10 @@ export class CacheContentfulApi extends ContentfulApi {
         }, {});
     }
 
-    // protected async getCacheEntry(type: string, id: string, query?: ApiQuery): Promise<ContentfulEntity> {
-    //     const cache = this.cache[type] && this.cache[type].item;
-    //     const key = id;
-
-    //     if (cache) {
-    //         const value = cache.get(key);
-    //         if (value !== undefined) {
-    //             debug(`got from cache: ${type}=${id}`);
-    //             return Promise.resolve(value);
-    //         }
-    //     }
-
-    //     return this.getEntry(id, query)
-    //         .then(entity => {
-    //             if (cache) {
-    //                 debug(`put to cache: ${type}=${id}`);
-    //                 cache.set(key, entity);
-    //             }
-    //             return entity;
-    //         });
-    // }
-
-    protected async getCacheEntries<T extends ContentfulEntity>(type: string, query: ApiQuery): Promise<ContentfulEntityCollection<ContentfulEntity>> {
-        const cache = this.cache[type] && (query.limit > 1 ? this.cache[type].collection : this.cache[type].item);
+    protected getCacheEntries<T extends ContentfulEntity>(type: string, query: ApiQuery)
+        : Promise<ContentfulEntityCollection<ContentfulEntity>> {
+        const cache = this.cache[type]
+            && (query.limit > 1 ? this.cache[type].collection : this.cache[type].item);
         const key = type + '_' + objectHash(query);
 
         if (cache) {
@@ -75,7 +55,7 @@ export class CacheContentfulApi extends ContentfulApi {
             }
         }
 
-        return this.getEntries(query)
+        return super.getEntries(query)
             .then(collection => {
                 if (cache) {
                     debug(`put to cache: ${key}=${query}`);

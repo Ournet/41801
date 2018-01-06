@@ -24,11 +24,11 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
 
     res.locals.site.head.canonical = canonical(links.home());
 
-    const dataContainer: DataContainer = res.locals.dataContainer;
+    const dc: DataContainer = res.locals.dataContainer;
 
-    dataContainer.push('articleCollection', Data.articles({ limit: 10, order: '-createdAt' }));
+    dc.push('articleCollection', Data.articles({ limit: 10, order: '-createdAt' }));
 
-    dataContainer.getData()
+    dc.getData()
         .then(data => {
             res.render('articles', data);
         })

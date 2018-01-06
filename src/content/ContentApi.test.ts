@@ -15,11 +15,17 @@ test('category', async t => {
 test('rootCategories', async t => {
     let categories = await api.rootCategories();
 
-    t.is(true, categories.items.length > 0, 'many root categories');
+    t.is(true, categories.length > 0, 'many root categories');
 
     //for cache test
     categories = await api.rootCategories();
-    t.is(true, categories.items.length > 0, 'many root categories');
+    t.is(true, categories.length > 0, 'many root categories');
+});
+
+test('mainCategories', async t => {
+    let categories = await api.mainCategories(10);
+
+    t.is(true, categories.length === 0, 'many main categories');
 });
 
 test('article', async t => {
