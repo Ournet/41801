@@ -1,10 +1,10 @@
 
 require('dotenv').config();
 
-import { ImplContentApi } from './ContentApi';
+import { ContentApi } from './ContentApi';
 import test from 'ava';
 
-const api = new ImplContentApi();
+const api = new ContentApi();
 
 test('category', async t => {
     const category = await api.category({ id: '1IjH8VopI42qWcYQeukQOG_' });

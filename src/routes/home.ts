@@ -1,5 +1,6 @@
 
 import { Router, Request, Response, NextFunction } from 'express';
+import { Data, DataContainer } from '../data';
 // import { format } from 'util';
 // import config from '../config';
 import links from '../links';
@@ -12,7 +13,7 @@ export default route;
 
 //index
 
-route.get('/', function (_req: Request, res: Response, _next: NextFunction) {
+route.get('/', function (_req: Request, res: Response, next: NextFunction) {
 
     maxageIndex(res);
     const __ = res.locals.__;
@@ -23,5 +24,13 @@ route.get('/', function (_req: Request, res: Response, _next: NextFunction) {
 
     res.locals.site.head.canonical = canonical(links.home());
 
-    res.render('index');
+    const dataContainer: DataContainer = res.locals.dataContainer;
+
+    dataContainer.push('articleCollection', Data.articles({ limit: 10, order: '-createdAt' }));
+
+    dataContainer.getData()
+        .then(data => {
+            res.render('articles', data);
+        })
+        .catch(next);
 });

@@ -1,2 +1,2 @@
 
-export { ContentApi, ImplContentApi, CategoryEntity, ImageEntity, ArticleEntity } from './ContentApi';
+export { IContentApi, ContentApi, CategoryEntity, ImageEntity, ArticleEntity } from './ContentApi';

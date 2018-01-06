@@ -66,7 +66,7 @@ export interface FilterCategoryParams {
     slug?: string
 }
 
-export interface ContentApi {
+export interface IContentApi {
     category(filter: FilterCategoryParams): Promise<CategoryEntity>
     rootCategories(): Promise<CategoryCollection>
     allCategories(): Promise<CategoryCollection>
@@ -74,7 +74,7 @@ export interface ContentApi {
     article(filter: FilterArticleParams): Promise<ArticleEntity>
 }
 
-export class ImplContentApi extends CacheContentfulApi implements ContentApi {
+export class ContentApi extends CacheContentfulApi implements IContentApi {
     constructor() {
         super({
             space: process.env.CONTENTFUL_SPACE,

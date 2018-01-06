@@ -4,6 +4,7 @@ import { format } from 'util';
 import { moment } from '../utils';
 import { Request, Response, NextFunction } from 'express';
 import config from '../config';
+import { DataContainer } from '../data';
 const assets: { [name: string]: string } = require('../../public/static/rev-manifest.json');
 
 const util = {
@@ -32,7 +33,7 @@ export default function (_req: Request, res: Response, next: NextFunction) {
 
     res.locals._events = [];
 
-    res.locals.viewdata = [] as Promise<any>[];
+    res.locals.dataContainer = new DataContainer();
 
     next();
 };
