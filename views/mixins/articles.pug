@@ -11,5 +11,6 @@ mixin articleListBlock(articles)
         h4.c-alb_title
           a(href=links.article(item.slug))= item.title
         .c-alb_stats
-          i.i-eye
-          = item.countViews.toLocaleString(culture.language)
+          time= util.moment(item.createdAt).locale(culture.language).format('ll')
+          //- i.i-eye
+          //- = item.countViews.toLocaleString(culture.language)

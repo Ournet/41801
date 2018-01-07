@@ -170,7 +170,7 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
     mainCategories(limit: number): Promise<CategoryEntity[]> {
         return this.getCategoriesList({
             order: 'fields.slug',
-            'fields.parent[exists]': true,
+            'fields.parent.sys': null,
             limit: limit
         });
     }

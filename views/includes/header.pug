@@ -5,4 +5,8 @@
   .col.text-center
     a(href=links.home(), title=config.name)#logo= config.name
   .col
-#page-menu Aici menu
+#page-menu
+  ul.page-menu_list
+    each item in mainCategories
+      li.page-menu_i
+        a(href=links.category(item.slug), title=item.name)= item.name
