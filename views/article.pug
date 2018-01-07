@@ -1,5 +1,12 @@
 extends ./layouts/root
 
+block metas
+  meta(property='og:type', 'article')
+  meta(property='og:title', article.title)
+  meta(property='og:description', article.summary)
+  meta(property='og:image', content=article.image.url)
+  meta(name='twitter:card', content='symmary')
+
 block page_main_content
   .row
     .col-md-9
@@ -39,7 +46,7 @@ block page_main_content
               .article_body(role='main')!= util.parseArticle(article.text)
               footer
                 .article_details
-                  time(datetime=article.createdAt)= util.moment(article.createdAt).locale(culture.language).format('lll')
+                  time.floar-right(datetime=article.createdAt)= util.moment(article.createdAt).locale(culture.language).format('lll')
           .col-lg-1
       //- include ./includes/article-bottom-ads
     .col-md-3 Aici Ads

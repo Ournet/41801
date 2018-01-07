@@ -54,6 +54,7 @@ route.get('/article/:slug', function (req: Request, res: Response, next: NextFun
             res.locals.site.head.title = article.title;
             res.locals.site.head.description = article.summary;
             res.locals.site.head.canonical = canonical(links.article(article.slug));
+            res.locals.site.head.image = article.image.url;
 
             maxageArticle(res, article);
 

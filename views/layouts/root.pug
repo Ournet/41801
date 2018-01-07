@@ -12,6 +12,9 @@ html(lang=culture.language)
     block styles
     if (site.head.canonical)
       link(rel='canonical', href=site.head.canonical)
+      meta(property='og:url', content=site.head.canonical)
+    if (config.twitterId)
+      meta(property='twitter:site', content=config.twitterId)
 
     if (config.facebookId)
       meta(property='fb:app_id', content=config.facebookId)
@@ -21,6 +24,7 @@ html(lang=culture.language)
     meta(property='og:site_name', content=config.name)
     //- meta(property='og:updated_time', content=currentDate.toDate().toISOString())
     meta(property='og:locale', content=culture.locale)
+    block metas
     if (NODE_ENV==='production')
       link(rel="stylesheet", media="all", href="/static/css/" + assets.getName('main.css'))
     else
