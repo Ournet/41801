@@ -4,6 +4,7 @@ import { maxage } from './maxage';
 import { Request, Response } from "express";
 
 export default function catchError(req: Request, res: Response, error: any) {
+    console.log(error);
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
     logger.error(error.message || 'errorHandler', {

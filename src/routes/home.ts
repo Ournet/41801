@@ -5,7 +5,8 @@ import { Data, DataContainer } from '../data';
 // import config from '../config';
 import links from '../links';
 import { canonical } from '../utils';
-import { maxageIndex } from '../maxage';
+import { maxageIndex, maxageArticle, maxageCategory } from '../maxage';
+import { format } from 'util';
 
 const route: Router = Router();
 
@@ -18,8 +19,8 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
     maxageIndex(res);
     const __ = res.locals.__;
 
-    res.locals.title = res.locals.site.head.title = __('home_title');
-    res.locals.subTitle = res.locals.site.head.description = __('home_description');
+    res.locals.site.head.title = __('home_title');
+    res.locals.site.head.description = __('home_description');
     res.locals.site.head.keywords = __('home_keywords');
 
     res.locals.site.head.canonical = canonical(links.home());
@@ -31,6 +32,67 @@ route.get('/', function (_req: Request, res: Response, next: NextFunction) {
     dc.getData()
         .then(data => {
             res.render('articles', data);
+        })
+        .catch(next);
+});
+
+route.get('/article/:slug', function (req: Request, res: Response, next: NextFunction) {
+
+    const slug = req.params.slug;
+    // const __ = res.locals.__;
+
+    const dc: DataContainer = res.locals.dataContainer;
+
+    Data.article({ slug: slug })
+        .then(article => {
+            if (!article) {
+                const error: any = new Error(`Not found article ${slug}`)
+                error.statusCode = 404;
+                return next(error);
+            }
+            res.locals.article = article;
+            res.locals.site.head.title = article.title;
+            res.locals.site.head.description = article.summary;
+            res.locals.site.head.canonical = canonical(links.article(article.slug));
+
+            maxageArticle(res, article);
+
+            dc.push('articles', Data.articlesList({ limit: 10, order: '-createdAt', categoryId: article.category.id }));
+            return dc.getData()
+                .then(data => {
+                    res.render('article', data);
+                });
+        })
+        .catch(next);
+});
+
+route.get('/:slug', function (req: Request, res: Response, next: NextFunction) {
+
+    const slug = req.params.slug;
+    maxageCategory(res);
+    const __ = res.locals.__;
+
+    const dc: DataContainer = res.locals.dataContainer;
+
+    Data.category({ slug: slug })
+        .then(category => {
+            if (!category) {
+                const error: any = new Error(`Not found category ${slug}`)
+                error.statusCode = 404;
+                return next(error);
+            }
+            res.locals.category = category;
+            res.locals.site.head.title = format(__('category_title_format'), category.name);
+            res.locals.site.head.description = format(__('category_description_format'), category.name);
+            res.locals.site.head.canonical = canonical(links.category(category.slug));
+
+            res.locals.title = category.name;
+
+            dc.push('articleCollection', Data.articles({ limit: 10, order: '-createdAt', categoryId: category.id }));
+            return dc.getData()
+                .then(data => {
+                    res.render('articles', data);
+                });
         })
         .catch(next);
 });

@@ -1,4 +1,6 @@
 import { Response } from "express";
+import { ArticleEntity } from "./content/ContentApi";
+const ms = require('ms');
 
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -25,5 +27,24 @@ export function maxageRedirect(res: Response) {
 }
 
 export function maxageIndex(res: Response) {
+    maxage(res, 60 * 1);
+}
+
+export function maxageCategory(res: Response) {
     maxage(res, 60 * 2);
+}
+
+export function maxageArticle(res: Response, article: ArticleEntity) {
+    const date = new Date(article.createdAt);
+    const time = Date.now() - date.getTime();
+    if (time < ms('6h')) {
+        // 15 min
+        maxage(res, 15);
+    } else if (time < ms('24h')) {
+        // 30 min
+        maxage(res, 30);
+    } else {
+        // 2 hours
+        maxage(res, 60 * 2);
+    }
 }

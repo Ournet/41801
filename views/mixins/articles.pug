@@ -10,3 +10,6 @@ mixin articleListBlock(articles)
           img.c-alb_pic(src=item.image.url+'?w=350&h=200', alt=item.title)
         h4.c-alb_title
           a(href=links.article(item.slug))= item.title
+        .c-alb_stats
+          i.i-eye
+          = item.countViews.toLocaleString(culture.language)

@@ -1,0 +1,47 @@
+extends ./layouts/root
+
+block page_main_content
+  .row
+    .col-md-9
+      .article-block
+        .row
+          .col-lg-1
+          .col-lg-10
+            article.article
+              header
+                .float-right.article_details
+                  i.i-eye
+                  = article.countViews.toLocaleString(culture.language)
+                .article_cat
+                  if (article.category)
+                    //- if(article.category.parent)
+                    //-   a(href=links.category(article.category.parent.slug), title=article.category.parent.name)= article.category.parent.name
+                    //-   | &rsaquo;
+                    a(href=links.category(article.category.slug), title=article.category.name)= article.category.name
+                h1.article_title= article.title
+                .article_top_share
+                  .row
+                    .col
+                      a(href='#').c-share.c-share_us
+                        span.d-lg-none= __('subscribe')
+                        span.d-none.d-lg-inline= __('subscribe_us')
+                    .col
+                      a(href='#').c-share.c-share_fb
+                        span.d-lg-none Facebook
+                        span.d-none.d-lg-inline= __('share_on_facebook')
+                    .col.d-none.d-sm-block
+                      a(href='#').c-share.c-share_twitter
+                        span.d-lg-none Twitter
+                        span.d-none.d-lg-inline= __('share_on_twitter')
+                  .article_subscribe.d-none
+                    p= __('subscribe_us_info')
+                    .text-center Aici FB Like
+              .article_body(role='main')!= util.parseArticle(article.text)
+              footer
+                .article_details
+                  time(datetime=article.createdAt)= util.moment(article.createdAt).locale(culture.language).format('lll')
+          .col-lg-1
+      //- include ./includes/article-bottom-ads
+    .col-md-3 Aici Ads
+
+  +articleListBlock(articles)

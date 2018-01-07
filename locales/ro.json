@@ -6,5 +6,12 @@
 	"search_": "Caută...",
 	"home_title": "home_title",
 	"home_description": "home_description",
-	"home_keywords": "home_keywords"
+	"home_keywords": "home_keywords",
+	"category_title_format": "category_title_format",
+	"category_description_format": "category_description_format",
+	"share_on_facebook": "share_on_facebook",
+	"subscribe": "subscribe",
+	"subscribe_us": "subscribe_us",
+	"share_on_twitter": "share_on_twitter",
+	"subscribe_us_info": "subscribe_us_info"
 }

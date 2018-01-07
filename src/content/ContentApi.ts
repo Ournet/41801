@@ -30,6 +30,7 @@ export interface ArticleEntity extends Entity {
     summary?: string
     image?: ImageEntity
     category?: CategoryEntity
+    countViews?: number
 }
 
 export interface ImageEntity extends Entity {
@@ -237,6 +238,7 @@ function toArticle(entity: ContentfulEntity): ArticleEntity {
         title: entity.fields.title,
         slug: entity.fields.slug,
         summary: entity.fields.summary,
+        countViews: entity.fields.countViews || 1,
     }
 
     if (entity.fields.text) {

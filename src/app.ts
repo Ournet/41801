@@ -10,6 +10,7 @@ import initi18n from './i18n';
 import catchError from './catch';
 import rootMiddleware from './middlewares/root';
 import homeRoute from './routes/home';
+import assets from './assets';
 // const cookieParser = require('cookie-parser');
 
 // const cors = require('cors');
@@ -26,6 +27,7 @@ app.disable('etag');
 app.locals.NODE_ENV = process.env.NODE_ENV;
 app.locals.links = links;
 app.locals.config = config;
+app.locals.assets = assets;
 
 // app.use(bodyParser.json()); // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ // to support URL-encoded bodies

@@ -39,7 +39,11 @@ gulp.task('sass:watch', function () {
   gulp.watch('./assets/scss/*.scss', ['sass-dev']);
 });
 
-const mainJsFiles = ['./assets/js/jq-loader.js','./assets/js/header.js'];
+const mainJsFiles = [
+  './assets/js/jq-loader.js',
+  './assets/js/nav.js',
+  './assets/js/article.js',
+];
 const jsDist = './public/static/js';
 
 gulp.task('js-dev', function () {
