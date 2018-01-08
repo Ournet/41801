@@ -5,7 +5,7 @@ const sass = require('gulp-sass');
 const cleanCSS = require('gulp-clean-css');
 const config = require('./lib/config').default;
 const rename = require('gulp-rename');
-const rev = require('gulp-rev');
+const rev = require('gulp-rev-all');
 const concat = require('gulp-concat');
 const imagemin = require('gulp-imagemin');
 // const ico = require('gulp-to-ico');
@@ -26,12 +26,9 @@ gulp.task('sass', function () {
     .pipe(gulp.dest(cssDist))
     // .pipe(sourcemaps.init())
     .pipe(cleanCSS())
-    .pipe(rev())
+    .pipe(rev.revision())
     .pipe(gulp.dest(cssDist))
-    .pipe(rev.manifest({
-      base: 'public',
-      merge: true // merge with the existing manifest if one exists
-    }))
+    .pipe(rev.manifestFile())
     // .pipe(sourcemaps.write())
     // .pipe(rename({ basename: config.css.main }))
     .pipe(gulp.dest(cssDist));
@@ -59,12 +56,9 @@ gulp.task('js', function () {
     .pipe(concat('main.js'))
     .pipe(gulp.dest(jsDist))
     // .pipe(cleanCSS())
-    .pipe(rev())
+    .pipe(rev.revision())
     .pipe(gulp.dest(jsDist))
-    .pipe(rev.manifest({
-      base: 'public',
-      merge: true // merge with the existing manifest if one exists
-    }))
+    .pipe(rev.manifestFile())
     // .pipe(sourcemaps.write())
     // .pipe(rename({ basename: config.css.main }))
     .pipe(gulp.dest(jsDist));

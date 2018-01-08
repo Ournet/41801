@@ -8,7 +8,4 @@ types
 
 public/static/css/
 public/static/js/
-public/static/rev-manifest.json
 public/static/img/
-
-yarn.*
