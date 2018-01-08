@@ -1,8 +1,8 @@
 {
-  "name": "41801",
+  "name": "descopero",
   "version": "0.0.1",
   "private": true,
-  "description": "41801",
+  "description": "descope.ro",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
   "scripts": {
@@ -25,17 +25,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ournet/41801.git"
+    "url": "https://github.com/Ournet/descopero.git"
   },
   "keywords": [
-    "41801"
+    "descopero",
+    "descope.ro"
   ],
   "author": "Dumitru Cantea",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Ournet/41801/issues"
+    "url": "https://github.com/Ournet/descopero/issues"
   },
-  "homepage": "https://github.com/Ournet/41801",
+  "homepage": "https://github.com/Ournet/descopero",
   "dependencies": {
     "bootstrap": "^4.0.0-beta.3",
     "contentful": "^5.0.5",
@@ -74,7 +75,7 @@
     "name": "Descope.ro",
     "host": "descope.ro",
     "domain": "descope.ro",
-    "schema": "https:",
+    "schema": "http:",
     "language": "ro",
     "locale": "ro_RO",
     "facebookPublisher": "descope.ro",

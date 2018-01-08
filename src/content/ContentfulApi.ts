@@ -1,5 +1,5 @@
 
-const debug = require('debug')('41801-content');
+const debug = require('debug')('descopero-content');
 import { createClient, ContentfulClientApi, Entry, EntryCollection } from 'contentful'
 
 export interface ApiOptions {

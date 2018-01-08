@@ -1,5 +1,5 @@
 
-const debug = require('debug')('41801-content');
+const debug = require('debug')('descopero-content');
 import { ContentfulApi, ApiOptions, ContentfulEntity, ApiQuery, ContentfulEntityCollection } from './ContentfulApi';
 import * as LRU from 'lru-cache';
 const objectHash = require('object-hash');

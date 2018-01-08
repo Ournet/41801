@@ -11,7 +11,7 @@ export default logger as ILogger
 
 if (process.env.NODE_ENV === 'production') {
     logger.loggly({
-        tags: ['41801'],
+        tags: ['descopero'],
         json: true
     });
     logger.removeConsole();

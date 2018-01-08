@@ -1,5 +1,5 @@
 {
   "home": "/",
-  "article": "/article/${0}/",
-  "category": "/${0}/"
+  "article": "/article/${0}",
+  "category": "/${0}"
 }
