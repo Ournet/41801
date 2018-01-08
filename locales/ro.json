@@ -4,15 +4,16 @@
 	"error_description": "A apărut o eroare. Căutăm vinovații...",
 	"home": "Acasă",
 	"search_": "Caută...",
-	"home_title": "home_title",
+	"home_title": "41801",
 	"home_description": "home_description",
 	"home_keywords": "home_keywords",
-	"category_title_format": "category_title_format",
+	"category_title_format": "%s articole",
 	"category_description_format": "category_description_format",
-	"share_on_facebook": "share_on_facebook",
-	"subscribe": "subscribe",
-	"subscribe_us": "subscribe_us",
-	"share_on_twitter": "share_on_twitter",
+	"share_on_facebook": "Trimite pe Facebook",
+	"subscribe": "Abonează-te",
+	"subscribe_us": "Abonează-te",
+	"share_on_twitter": "Trimite pe Twitter",
 	"subscribe_us_info": "subscribe_us_info",
-	"latest_articles": "latest_articles"
+	"latest_articles": "Ultimele articole",
+	"footer_copyright": "Copyright © 2018, Leap. "
 }
