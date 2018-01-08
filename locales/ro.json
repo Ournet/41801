@@ -1,19 +1,18 @@
 {
-	"41801": "41801",
 	"error_title": "Eroare",
 	"error_description": "A apărut o eroare. Căutăm vinovații...",
 	"home": "Acasă",
 	"search_": "Caută...",
-	"home_title": "41801",
-	"home_description": "home_description",
-	"home_keywords": "home_keywords",
-	"category_title_format": "%s articole",
-	"category_description_format": "category_description_format",
+	"home_title": "Descope.ro - Trăiește. Descoperă. Creează.",
+	"home_description": "Trăiește, descoperă, creează!",
+	"home_keywords": "descopero, trăiește, descoperă, creează",
+	"category_title_format": "%s | Articole | Descope.ro",
+	"category_description_format": "Articole despre %s pe Descope.ro",
 	"share_on_facebook": "Trimite pe Facebook",
 	"subscribe": "Abonează-te",
 	"subscribe_us": "Abonează-te",
 	"share_on_twitter": "Trimite pe Twitter",
-	"subscribe_us_info": "subscribe_us_info",
+	"subscribe_us_info": "Descope.ro este la început de drum - are nevoie de susținerea ta.<br/>Alătură-te fanilor noștri!",
 	"latest_articles": "Ultimele articole",
-	"footer_copyright": "Copyright © 2018, Leap. "
+	"footer_copyright": "Copyright © 2018, Descope.ro - Se acceptă doar prenuarea parțială a articolelor, obligatoriu cu link activ către sursă."
 }

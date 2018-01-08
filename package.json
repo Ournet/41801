@@ -62,10 +62,22 @@
     "debug": "^3.1.0",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.9.2",
+    "gulp-imagemin": "^4.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-rev": "^8.1.1",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.3",
+    "gulp-to-ico": "^1.0.0",
     "typescript": "^2.6.1"
+  },
+  "descopero": {
+    "name": "Descope.ro",
+    "host": "descope.ro",
+    "domain": "descope.ro",
+    "schema": "https:",
+    "language": "ro",
+    "locale": "ro_RO",
+    "facebookPublisher": "descope.ro",
+    "facebookId": ""
   }
 }

@@ -7,6 +7,8 @@ const config = require('./lib/config').default;
 const rename = require('gulp-rename');
 const rev = require('gulp-rev');
 const concat = require('gulp-concat');
+const imagemin = require('gulp-imagemin');
+// const ico = require('gulp-to-ico');
 // const sourcemaps = require('gulp-sourcemaps');
 
 const mainSassFiles = ['./assets/scss/main.scss'];
@@ -72,5 +74,19 @@ gulp.task('js:watch', function () {
   gulp.watch('./assets/js/*.js', ['js-dev']);
 });
 
-gulp.task('prod', ['sass', 'js']);
-gulp.task('default', ['sass-dev', 'js-dev', 'sass:watch', 'js:watch']);
+gulp.task('imagemin', () =>
+  gulp.src('./assets/img/**/*.png')
+    .pipe(imagemin())
+    .pipe(gulp.dest('./public/static/img/'))
+);
+
+// gulp.task('favicon', function () {
+//   return gulp.src('./public/favicon.png')
+//     .pipe(ico('favicon.ico', { resize: false, sizes: [32] }))
+//     .pipe(gulp.dest('./public/'));
+// });
+
+gulp.task('img', ['imagemin']);
+
+gulp.task('prod', ['sass', 'js', 'img']);
+gulp.task('default', ['img', 'sass-dev', 'js-dev', 'sass:watch', 'js:watch']);

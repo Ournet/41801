@@ -10,6 +10,7 @@ import initi18n from './i18n';
 import catchError from './catch';
 import rootMiddleware from './middlewares/root';
 import homeRoute from './routes/home';
+import redirectRoute from './routes/redirect';
 import assets from './assets';
 // const cookieParser = require('cookie-parser');
 
@@ -51,6 +52,8 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 app.use(express.static(path.join(__dirname, '../public'), {
     maxAge: isProduction ? (1000 * 60 * 15) : 0
 }));
+
+app.use(redirectRoute);
 
 app.use(initi18n);
 app.use(rootMiddleware);

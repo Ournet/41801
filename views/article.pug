@@ -21,9 +21,9 @@ block page_main_content
                 //-   = article.countViews.toLocaleString(culture.language)
                 .article_cat
                   if (article.category)
-                    //- if(article.category.parent)
-                    //-   a(href=links.category(article.category.parent.slug), title=article.category.parent.name)= article.category.parent.name
-                    //-   | &rsaquo;
+                    if(article.category.parent)
+                      a(href=links.category(article.category.parent.slug), title=article.category.parent.name)= article.category.parent.name
+                      | &rsaquo;
                     a(href=links.category(article.category.slug), title=article.category.name)= article.category.name
                 h1.article_title= article.title
                 .article_top_share
@@ -41,8 +41,8 @@ block page_main_content
                         span.d-lg-none Twitter
                         span.d-none.d-lg-inline= __('share_on_twitter')
                   .article_subscribe.d-none
-                    p= __('subscribe_us_info')
-                    .text-center Aici FB Like
+                    p!= __('subscribe_us_info')
+                    .text-center
               .article_body(role='main')!= util.parseArticle(article.text)
               footer
                 .article_details
