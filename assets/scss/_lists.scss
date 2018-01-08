@@ -20,3 +20,27 @@
 .c-alb_ads {
     text-align: center;
 }
+
+
+.c-alm_i {
+    &:hover {
+        text-decoration: none;
+        .c-alm_title {
+            text-decoration: underline;
+        }
+    }
+}
+.c-alm_title {
+    margin-bottom: 2px;
+}
+.c-alm_pic {
+    border-radius: $border-radius;
+    border-radius: $border-radius;
+    height: 50px;
+    width: 50px;
+}
+.c-alm_stats {
+    color: $muted-color;
+    font-size: 80%;
+    text-decoration: none;
+}

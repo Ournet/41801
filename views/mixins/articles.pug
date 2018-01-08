@@ -1,16 +1,34 @@
 
-mixin articleListBlock(articles)
+mixin articleListBlock(articles, options)
+  - options = options || { }
+  - ads = options.ads || []
+  - itemClass = options.itemClass || 'col-sm-4 col-lg-3'
   .row.c-alb
     each item, index in articles
-      if ((index+1) % 5 === 0)
+      if (~ads.indexOf(index))
         .col-md-4.col-lg-3.col-sm-12.c-alb_i.c-alb_ads
           include ../includes/list-item-ads
-      .col-sm-4.col-lg-3.c-alb_i
+      .c-alb_i(class=itemClass)
         a(href=links.article(item.slug))
-          img.c-alb_pic(src=item.image.url+'?w=350&h=200', alt=item.title)
+          img.c-alb_pic(src=item.image.url+'?w=350&h=200&fit=fill', alt=item.title)
         h4.c-alb_title
           a(href=links.article(item.slug))= item.title
         .c-alb_stats
           time= util.moment(item.createdAt).locale(culture.language).format('ll')
+          //- i.i-eye
+          //- = item.countViews.toLocaleString(culture.language)
+
+mixin articleListMedia(articles, options)
+  - options = options || { }
+  //- - ads = options.ads || []
+  //- - itemClass = options.itemClass || 'col-sm-4 col-lg-3'
+  .list-unstyled.c-alm
+    each item in articles
+      a.media.c-alm_i(href=links.article(item.slug))
+        img.mr-3.c-alm_pic(src=item.image.url+'?w=50&h=50&fit=fill', alt=item.title)
+        .media-body
+          h5.c-alm_title= item.title
+          .c-alm_stats
+            time= util.moment(item.createdAt).locale(culture.language).format('ll')
           //- i.i-eye
           //- = item.countViews.toLocaleString(culture.language)

@@ -49,6 +49,12 @@ block page_main_content
                   time.floar-right(datetime=article.createdAt)= util.moment(article.createdAt).locale(culture.language).format('lll')
           .col-lg-1
       //- include ./includes/article-bottom-ads
-    .col-md-3 Aici Ads
+    .col-md-3
+      if (latestArticles)
+        .c-group
+          h3.c-group_title= __('latest_articles')
+          .c-group_content
+            +articleListMedia(latestArticles)
+
 
   +articleListBlock(articles)

@@ -56,9 +56,13 @@ route.get('/article/:slug', function (req: Request, res: Response, next: NextFun
             res.locals.site.head.canonical = canonical(links.article(article.slug));
             res.locals.site.head.image = article.image.url;
 
+            res.locals.selectedCategory = article.category;
+
             maxageArticle(res, article);
 
+            dc.push('latestArticles', Data.articlesList({ limit: 6, order: '-createdAt' }));
             dc.push('articles', Data.articlesList({ limit: 10, order: '-createdAt', categoryId: article.category.id }));
+
             return dc.getData()
                 .then(data => {
                     res.render('article', data);
@@ -82,6 +86,7 @@ route.get('/:slug', function (req: Request, res: Response, next: NextFunction) {
                 error.statusCode = 404;
                 return next(error);
             }
+            res.locals.selectedCategory = category;
             res.locals.category = category;
             res.locals.site.head.title = format(__('category_title_format'), category.name);
             res.locals.site.head.description = format(__('category_description_format'), category.name);
