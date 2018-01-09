@@ -170,9 +170,8 @@ export class ContentApi extends CacheContentfulApi implements IContentApi {
     mainCategories(limit: number): Promise<CategoryEntity[]> {
         return this.getCategoriesList({
             order: 'fields.slug',
-            'fields.parent.sys': null,
-            limit: limit
-        });
+            limit: limit + 10
+        }).then(list => list.filter(item => item.parent && item.parent.name).slice(0, limit));
     }
 
     rootCategories(): Promise<CategoryEntity[]> {

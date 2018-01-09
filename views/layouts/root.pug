@@ -69,3 +69,11 @@ html(lang=culture.language)
       script(type='text/javascript', async, src="/static/js/main.js")
     block scripts
       //- script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js')
+    script.
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/ro_RO/sdk.js#xfbml=1&version=v2.11&appId=170044703609250';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));

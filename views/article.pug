@@ -42,11 +42,13 @@ block page_main_content
                         span.d-none.d-lg-inline= __('share_on_twitter')
                   .article_subscribe.d-none
                     p!= __('subscribe_us_info')
-                    .text-center
+                    .text-center.fb-follow(data-href=site.head.canonical, data-layout="standard", data-size="small", data-show-faces="false")
               .article_body(role='main')!= util.renderArticle(article.text)
-              footer
+              footer.article_footer
                 .article_details
-                  time.floar-right(datetime=article.createdAt)= util.moment(article.createdAt).locale(culture.language).format('lll')
+                  time.float-right(datetime=article.createdAt)= util.moment(article.createdAt).locale(culture.language).format('lll')
+                  .fb-share-button(data-href=site.head.canonical, data-layout="box_count", data-size="small", data-mobile-iframe="true")
+                    a.fb-xfbml-parse-ignore(target="_blank" href="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(site.head.canonical)+"&amp;src=sdkpreparse") Distribuie
           .col-lg-1
       //- include ./includes/article-bottom-ads
     .col-md-3
