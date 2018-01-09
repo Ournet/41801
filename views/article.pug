@@ -43,7 +43,7 @@ block page_main_content
                   .article_subscribe.d-none
                     p!= __('subscribe_us_info')
                     .text-center
-                      .fb-follow(data-href='https://facebook.com/'+ config.facebookPublisher, data-layout="standard", data-size="small", data-show-faces="false")
+                      .fb-like(data-href='https://www.facebook.com/'+ config.facebookPublisher, data-layout="button_count", data-size="small", data-show-faces="false", data-action="like", data-share="false")
               .article_body(role='main')!= util.renderArticle(article.text)
               footer.article_footer
                 .article_details
