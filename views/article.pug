@@ -4,7 +4,7 @@ block metas
   meta(property='og:type', content='article')
   meta(property='og:title', content=article.title)
   meta(property='og:description', content=article.summary)
-  meta(property='og:image', content=article.image.url)
+  meta(property='og:image', content=config.schema+article.image.url)
   meta(name='twitter:card', content='symmary')
 
 block page_main_content
@@ -44,13 +44,12 @@ block page_main_content
                     p!= __('subscribe_us_info')
                     .text-center
                       .fb-follow(data-href='https://facebook.com/'+ config.facebookPublisher, data-layout="standard", data-size="small", data-show-faces="false")
-              .fb-follow(data-href='https://facebook.com/'+ config.facebookPublisher, data-layout="standard", data-size="small", data-show-faces="false")
               .article_body(role='main')!= util.renderArticle(article.text)
               footer.article_footer
                 .article_details
                   time.float-right(datetime=article.createdAt)= util.moment(article.createdAt).locale(culture.language).format('lll')
                   .fb-share-button(data-href=site.head.canonical, data-layout="box_count", data-size="small", data-mobile-iframe="true")
-                    a.fb-xfbml-parse-ignore(target="_blank" href="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(site.head.canonical)+"&amp;src=sdkpreparse") Distribuie
+                    //- a.fb-xfbml-parse-ignore(target="_blank" href="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(site.head.canonical)+"&amp;src=sdkpreparse")
           .col-lg-1
       //- include ./includes/article-bottom-ads
     .col-md-3
