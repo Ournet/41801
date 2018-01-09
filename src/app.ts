@@ -12,6 +12,9 @@ import rootMiddleware from './middlewares/root';
 import homeRoute from './routes/home';
 import redirectRoute from './routes/redirect';
 import assets from './assets';
+
+const ms = require('ms');
+const compression = require('compression');
 // const cookieParser = require('cookie-parser');
 
 // const cors = require('cors');
@@ -49,8 +52,13 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 // 		next();
 // 	});
 // }
+
+if (isProduction) {
+    app.use(compression());
+}
+
 app.use(express.static(path.join(__dirname, '../public'), {
-    maxAge: isProduction ? (1000 * 60 * 15) : 0
+    maxAge: isProduction ? ms('10d') : 0
 }));
 
 app.use(redirectRoute);
