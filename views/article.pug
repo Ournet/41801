@@ -43,7 +43,7 @@ block page_main_content
                   .article_subscribe.d-none
                     p!= __('subscribe_us_info')
                     .text-center
-              .article_body(role='main')!= util.parseArticle(article.text)
+              .article_body(role='main')!= util.renderArticle(article.text)
               footer
                 .article_details
                   time.floar-right(datetime=article.createdAt)= util.moment(article.createdAt).locale(culture.language).format('lll')

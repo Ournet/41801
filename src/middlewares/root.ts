@@ -1,7 +1,8 @@
 
 const _package = require('../../package.json');
 import { format } from 'util';
-import { moment, parseArticle } from '../utils';
+import { moment } from '../utils';
+import renderArticle from '../renderArticle';
 import { Request, Response, NextFunction } from 'express';
 import config from '../config';
 import { DataContainer, Data } from '../data';
@@ -9,7 +10,7 @@ import { DataContainer, Data } from '../data';
 const util = {
     moment: moment,
     format: format,
-    parseArticle: parseArticle,
+    renderArticle: renderArticle,
 };
 
 export default function (_req: Request, res: Response, next: NextFunction) {

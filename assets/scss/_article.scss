@@ -23,6 +23,10 @@
     a{
         color: $accent-color;
     }
+    h3 {
+        margin: 40px 0px 20px 0px;
+        text-align: center;
+    }
 }
 
 .article_top_share {
@@ -77,4 +81,13 @@
 .article_details {
     color: $muted-color;
     font-size: 80%;
+}
+
+.article_pic_a {
+    text-align: center;
+}
+
+.article_pic {
+    width: 650px;
+    max-width: 100%;
 }
