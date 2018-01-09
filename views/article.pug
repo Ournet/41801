@@ -1,9 +1,9 @@
 extends ./layouts/root
 
 block metas
-  meta(property='og:type', 'article')
-  meta(property='og:title', article.title)
-  meta(property='og:description', article.summary)
+  meta(property='og:type', content='article')
+  meta(property='og:title', content=article.title)
+  meta(property='og:description', content=article.summary)
   meta(property='og:image', content=article.image.url)
   meta(name='twitter:card', content='symmary')
 
@@ -42,7 +42,9 @@ block page_main_content
                         span.d-none.d-lg-inline= __('share_on_twitter')
                   .article_subscribe.d-none
                     p!= __('subscribe_us_info')
-                    .text-center.fb-follow(data-href=site.head.canonical, data-layout="standard", data-size="small", data-show-faces="false")
+                    .text-center
+                      .fb-follow(data-href='https://facebook.com/'+ config.facebookPublisher, data-layout="standard", data-size="small", data-show-faces="false")
+              .fb-follow(data-href='https://facebook.com/'+ config.facebookPublisher, data-layout="standard", data-size="small", data-show-faces="false")
               .article_body(role='main')!= util.renderArticle(article.text)
               footer.article_footer
                 .article_details
