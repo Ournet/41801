@@ -1,8 +1,6 @@
 
 import { Router, Request, Response, NextFunction } from 'express';
 import { Data, DataContainer } from '../data';
-// import { format } from 'util';
-// import config from '../config';
 import links from '../links';
 import { canonical } from '../utils';
 import { maxageIndex, maxageArticle, maxageCategory } from '../maxage';
