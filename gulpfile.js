@@ -8,6 +8,8 @@ const rename = require('gulp-rename');
 const rev = require('gulp-rev-all');
 const concat = require('gulp-concat');
 const imagemin = require('gulp-imagemin');
+const uglify = require('gulp-uglify');
+
 // const ico = require('gulp-to-ico');
 // const sourcemaps = require('gulp-sourcemaps');
 
@@ -55,6 +57,7 @@ gulp.task('js', function () {
   return gulp.src(mainJsFiles)
     .pipe(concat('main.js'))
     .pipe(gulp.dest(jsDist))
+    .pipe(uglify())
     // .pipe(cleanCSS())
     .pipe(rev.revision())
     .pipe(gulp.dest(jsDist))
