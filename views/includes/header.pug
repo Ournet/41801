@@ -6,7 +6,8 @@
     a(href=links.home(), title=config.name)#logo
   .col
 #page-menu
-  ul.page-menu_list
-    each item in mainCategories
-      li.page-menu_i
-        a(href=links.category(item.slug), title=item.name, class=(selectedCategory && selectedCategory.slug===item.slug) ? 'active': null)= item.name
+  if(mainCategories)
+    ul.page-menu_list
+      each item in mainCategories
+        li.page-menu_i
+          a(href=links.category(item.slug), title=item.name, class=(selectedCategory && selectedCategory.slug===item.slug) ? 'active': null)= item.name

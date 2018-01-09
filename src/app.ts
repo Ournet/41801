@@ -12,6 +12,7 @@ import rootMiddleware from './middlewares/root';
 import homeRoute from './routes/home';
 import redirectRoute from './routes/redirect';
 import assets from './assets';
+import { Response } from 'express';
 
 const ms = require('ms');
 
@@ -62,6 +63,10 @@ app.use(redirectRoute);
 app.use(initi18n);
 app.use(rootMiddleware);
 app.use(homeRoute);
+
+app.use(function (error: any, req: any, res: Response, _next: any) {
+    catchError(req, res, error);
+});
 
 app.all('*', function (req, res) {
     var error: any = new Error('Page not found');

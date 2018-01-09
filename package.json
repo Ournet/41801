@@ -38,6 +38,7 @@
   },
   "homepage": "https://github.com/Ournet/descopero",
   "dependencies": {
+    "atonic": "^1.0.4",
     "bootstrap": "^4.0.0-beta.3",
     "contentful": "^5.0.5",
     "dotenv": "^4.0.0",

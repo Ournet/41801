@@ -44,7 +44,7 @@ html(lang=culture.language)
     if (_events && _events.length)
       script
         each a in _events
-          = "gtag('event', '"+a.action+"', {'event_category':'"+a.category+"', 'event_label':'"+a.label+"')"
+          = "gtag('event', '"+a.action+"', {'event_category':'"+a.category+"', 'event_label':'"+a.label+"'})"
 
   body
     include ../mixins/articles
