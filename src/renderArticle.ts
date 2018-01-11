@@ -31,7 +31,7 @@ renderer.image = function (href: string, title: string, text: string) {
 }
 
 function replaceInstagram(text: string, locale: string) {
-    const reg = /@\[instagram\]\((?:https\:\/\/www\.instagram\.com\/p\/([a-zA-Z0-9]{6,24}).*|([a-zA-Z0-9]{6,24}))\)/;
+    const reg = /@\[instagram\]\((?:https\:\/\/www\.instagram\.com\/p\/([a-zA-Z0-9-]{6,24}).*|([a-zA-Z0-9-]{6,24}))\)/;
     let result;
     while (result = reg.exec(text)) {
         const id = result[1];
