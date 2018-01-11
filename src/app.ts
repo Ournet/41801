@@ -11,6 +11,7 @@ import catchError from './catch';
 import rootMiddleware from './middlewares/root';
 import homeRoute from './routes/home';
 import redirectRoute from './routes/redirect';
+import apiRoute from './routes/api';
 import assets from './assets';
 import { Response } from 'express';
 
@@ -59,6 +60,8 @@ app.use(express.static(path.join(__dirname, '../public'), {
 }));
 
 app.use(redirectRoute);
+
+app.use(apiRoute);
 
 app.use(initi18n);
 app.use(rootMiddleware);
